@@ -7,9 +7,10 @@ public class Celda :MonoBehaviour {
 	private bool salio;
 	private int numero=0;
 	private bool []aNums=new bool[9];
-	private Sprite sprite;
+	private Sprite sprite=null;
 	void Awake () {
 		sprite=transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sprite;
+	//	print("sprite "+sprite);
 		Initial();
 	}
 	private void Initial(){
@@ -18,9 +19,12 @@ public class Celda :MonoBehaviour {
 			salio=true;
 			numero=ObtenerNumero(sprite.name);
 			//print(gameObject.name +" numrer q salio "+numero);
+		//	print("salio "+salio+"sprite "+sprite.name);
 		}else{
 			//print( gameObject.name+" objeto nulo");
 		}
+
+
 	}
 
 	private int ObtenerNumero(string id){
@@ -78,6 +82,19 @@ public class Celda :MonoBehaviour {
 	public int getNumero{
 		get{
 			return numero;
+		}
+	}
+	public bool get_set_Salio{
+		get{
+			return salio;
+		}
+		set{
+			salio=value;
+		}
+	}
+	public bool[] getMyArraysBooleanos{
+		get{
+			return aNums; 
 		}
 	}
 }
