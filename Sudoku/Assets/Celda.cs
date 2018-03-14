@@ -8,16 +8,29 @@ public class Celda :MonoBehaviour {
 	private int numero=0;
 	private bool []aNums=new bool[9];
 	private Sprite sprite=null;
+	private SpriteRenderer spr;
 	void Awake () {
+		ResetBooleans();
+		spr=transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>();
 		sprite=transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sprite;
 	//	print("sprite "+sprite);
 		Initial();
+	//	print("sprite manual "+GameObject.FindGameObjectWithTag("base").GetComponent<Sprites>().sprites[0]);
+//		if(sprite==null){
+//			spr.sprite=GameObject.FindGameObjectWithTag("base").GetComponent<Sprites>().sprites[0];
+//		}
+	}
+	private void ResetBooleans(){
+		for(int i=0;i<9;i++){
+			aNums[i]=false;
+		}
 	}
 	private void Initial(){
 		if(sprite!=null){
 			//print("my sprite "+sprite.name);
 			salio=true;
 			numero=ObtenerNumero(sprite.name);
+
 			//print(gameObject.name +" numrer q salio "+numero);
 		//	print("salio "+salio+"sprite "+sprite.name);
 		}else{
@@ -55,6 +68,9 @@ public class Celda :MonoBehaviour {
 		aNums[index]=true;
 		if(BooleanosCompleto()){
 			numero=SetNumero();
+			salio=true;
+			print("array completo!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! "+numero);
+			SpriteSpawn(numero);
 		}
 	}
 	private bool BooleanosCompleto(){
@@ -65,15 +81,49 @@ public class Celda :MonoBehaviour {
 			}
 		}
 		if(auxContador==aNums.Length-1){
+
+
 			return true;
 		}else{
 			return false;
 		}
 	}
+	public void SpriteSpawn(int num){
+		switch(num){
+		case 1:
+			spr.sprite=GameObject.FindGameObjectWithTag("base").GetComponent<Sprites>().sprites[num-1];
+			break;
+		case 2:
+			spr.sprite=GameObject.FindGameObjectWithTag("base").GetComponent<Sprites>().sprites[num-1];
+			break;
+		case 3: 
+			spr.sprite=GameObject.FindGameObjectWithTag("base").GetComponent<Sprites>().sprites[num-1];
+			break;
+		case 4:
+			spr.sprite=GameObject.FindGameObjectWithTag("base").GetComponent<Sprites>().sprites[num-1];
+			break;
+		case 5:
+			spr.sprite=GameObject.FindGameObjectWithTag("base").GetComponent<Sprites>().sprites[num-1];
+			break;
+		case 6: 
+			spr.sprite=GameObject.FindGameObjectWithTag("base").GetComponent<Sprites>().sprites[num-1];
+			break;
+		case 7:
+			spr.sprite=GameObject.FindGameObjectWithTag("base").GetComponent<Sprites>().sprites[num-1];
+			break;
+		case 8:
+			spr.sprite=GameObject.FindGameObjectWithTag("base").GetComponent<Sprites>().sprites[num-1];
+			break;
+		case 9:
+			spr.sprite=GameObject.FindGameObjectWithTag("base").GetComponent<Sprites>().sprites[num-1];
+			break;
+					
+		}
+	}
 
 	private int SetNumero(){
 		for(int i=0;i<aNums.Length;i++){
-			if(aNums[i]){
+			if(!aNums[i]){
 				return i+1;
 			}
 		}
@@ -97,4 +147,5 @@ public class Celda :MonoBehaviour {
 			return aNums; 
 		}
 	}
+
 }
