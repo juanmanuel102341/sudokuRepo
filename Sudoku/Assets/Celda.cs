@@ -66,14 +66,14 @@ public class Celda :MonoBehaviour {
 		}
 	public void SetArrayBoleano(int index){
 		aNums[index]=true;
-		if(BooleanosCompleto()){
-			numero=SetNumero();
-			salio=true;
-			print("array completo!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! "+numero);
-			SpriteSpawn(numero);
-		}
+//		if(BooleanosCompleto()){
+//			numero=SetNumero();
+//			salio=true;
+//			print("array completo!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! "+numero);
+//			SpriteSpawn(numero);
+//		}
 	}
-	private bool BooleanosCompleto(){
+	public bool BooleanosCompleto(){
 		int auxContador=0;
 		for(int i=0;i<aNums.Length;i++){
 			if(aNums[i]){
@@ -81,7 +81,6 @@ public class Celda :MonoBehaviour {
 			}
 		}
 		if(auxContador==aNums.Length-1){
-
 
 			return true;
 		}else{
@@ -121,7 +120,7 @@ public class Celda :MonoBehaviour {
 		}
 	}
 
-	private int SetNumero(){
+	public int SetNumero(){
 		for(int i=0;i<aNums.Length;i++){
 			if(!aNums[i]){
 				return i+1;
@@ -132,6 +131,9 @@ public class Celda :MonoBehaviour {
 	public int getNumero{
 		get{
 			return numero;
+		}
+		set{
+			numero=value;
 		}
 	}
 	public bool get_set_Salio{

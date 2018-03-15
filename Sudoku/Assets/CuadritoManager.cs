@@ -154,9 +154,21 @@ public class CuadritoManager : MonoBehaviour {
 		}
 
 	}
+	private void ResetConteoContador(){
+		for(int i=0;i<9;i++){
+			for(int i2=0;i2<9;i2++){
+				contadorNumeros[i,i2]=0;
+			}
+		} 
+	}
+	private void ResetConteoCeldasVacias(){
+		for(int i=0;i<9;i++){
+			contadorCeldasVacias[i,0]=0;	
+		} 
+	}
 	public void RegistroNumerosConteo(){
-		
-
+		ResetConteoContador();
+		ResetConteoCeldasVacias();
 		for(int i=0;i<9;i++){
 
 			for(int i2=0;i2<9;i2++){
@@ -170,13 +182,10 @@ public class CuadritoManager : MonoBehaviour {
 							//si la celda vacia tiene dentro de su array alguno q es verdadero
 							RegistrandoConteo(i,i3);
 							print("num "+i3+"registrando conteo "+contadorNumeros[i,i3]);
-
 						}						
 					}
 					contadorCeldasVacias[i,0]+=1;
-				
 				}
-
 			}
 		}
 		ControlNumerosConteo();
@@ -194,12 +203,31 @@ public class CuadritoManager : MonoBehaviour {
 							if(celda.getMyArraysBooleanos[i2]==false){
 								print("cambiando valor!!!!!!!!!!!!!!!!!");
 								celda.get_set_Salio=true;
+								celda.getNumero=i2+1;
 								celda.SpriteSpawn(i2+1);
 							}
-
 						}
 					}
 				}	
+			}
+		}
+	}
+	public void Busqueda(){
+		for(int i=0;i<9;i++){
+			for(int i2=0;i2<9;i2++){
+				Celda celda=cuadritos[i,i2].GetComponent<Celda>();
+				if(!celda.get_set_Salio){
+					if(celda.BooleanosCompleto()){
+						int n=celda.SetNumero();
+						celda.get_set_Salio=true;
+						celda.getNumero=i2+1;
+						celda.SpriteSpawn(i2+1);
+						print("cuadrito "+i);
+						print("CELDA "+celda.name);
+						print("numero encontrado BUSQUEDA!!!!!!!! "+n);
+					
+					}
+				}
 			}
 		}
 	}

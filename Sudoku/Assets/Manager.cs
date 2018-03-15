@@ -24,18 +24,20 @@ public class Manager : MonoBehaviour {
 		Ciclo();
 	}
 	void Ciclo(){
+
 		cuadrito.Calc3();
 		fila.calc();
 		columna.calc();
+	
+	//	cuadrito.Control();
+	//	fila.Control();
+	//	columna.Control();
 
-		cuadrito.Control();
-		fila.Control();
-		columna.Control();
-
-		cuadrito.RegistroNumerosConteo();
-
+	//	cuadrito.RegistroNumerosConteo();
+	
 		//fila.Imprimir();
-		cuadrito.Imprimir();
+		//cuadrito.Imprimir();
+		
 	}
 
 
@@ -43,7 +45,12 @@ public class Manager : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		
+		cuadrito.Control();
+		fila.Control();
+		columna.Control();
+
+		cuadrito.RegistroNumerosConteo();
+		//cuadrito.Busqueda();
 	}
 	public GameObject [] getCeldas{
 		get{
