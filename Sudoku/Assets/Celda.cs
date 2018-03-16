@@ -114,12 +114,17 @@ public class Celda :MonoBehaviour {
 			spr.sprite=GameObject.FindGameObjectWithTag("base").GetComponent<Sprites>().sprites[num-1];
 			break;
 		case 9:
-			spr.sprite=GameObject.FindGameObjectWithTag("base").GetComponent<Sprites>().sprites[num-1];
+				spr.sprite=GameObject.FindGameObjectWithTag("base").GetComponent<Sprites>().sprites[num-1];
 			break;
 					
 		}
 	}
+	public void Resaltar(){
+		Sprites aux=GameObject.FindGameObjectWithTag("base").GetComponent<Sprites>();
+		aux.spriteClick.SetActive(true);
 
+		aux.spriteClick.transform.position=new Vector2(transform.position.x+0.1f,transform.position.y);
+	} 
 	public int SetNumero(){
 		for(int i=0;i<aNums.Length;i++){
 			if(!aNums[i]){

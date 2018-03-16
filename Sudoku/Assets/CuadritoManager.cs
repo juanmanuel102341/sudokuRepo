@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CuadritoManager : MonoBehaviour {
 
-	GameObject[,] cuadritos=new GameObject[9,9];
+	private GameObject[,] cuadritos=new GameObject[9,9];
 	private int[,]contadorNumeros=new int[9,9];
 	private int [,]contadorCeldasVacias=new int[9,1];
 	private Manager manager;
@@ -231,9 +231,11 @@ public class CuadritoManager : MonoBehaviour {
 			}
 		}
 	}
-	private void BuscandoNumero(int indiceCuadrito){
-		
-	}
 
+	public GameObject[,]getCuadritos{
+		get{
+			return cuadritos;
+		}
+	}
 	}
 

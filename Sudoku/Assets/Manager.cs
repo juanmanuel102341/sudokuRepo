@@ -49,8 +49,8 @@ public class Manager : MonoBehaviour {
 		fila.Control();
 		columna.Control();
 
-		cuadrito.RegistroNumerosConteo();
-		//cuadrito.Busqueda();
+	//	cuadrito.RegistroNumerosConteo();
+	
 	}
 	public GameObject [] getCeldas{
 		get{
