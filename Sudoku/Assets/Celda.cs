@@ -10,6 +10,8 @@ public class Celda :MonoBehaviour {
 	private Sprite sprite=null;
 	private SpriteRenderer spr;
 	private GameObject objResaltado;
+	private GameObject objAux;
+	private GameObject objInput;
 	private BoxCollider2D box;
 	private Vector2 initialLocalScale;
 	void Awake () {
@@ -130,7 +132,7 @@ public class Celda :MonoBehaviour {
 		PosicionarResaltado();
 	} 
 	private void PosicionarResaltado(){
-		
+		PosicionarObjetosAux();
 		Vector2 sizeBox=box.size;
 		print("pos initial "+initialLocalScale);
 		//objResaltado.transform.localScale=new Vector2(initialLocalScale.x,initialLocalScale.y);
@@ -140,6 +142,16 @@ public class Celda :MonoBehaviour {
 		objResaltado.transform.position=new Vector2(transform.position.x+box.offset.x,transform.position.y+box.offset.y);
 		print("pos bj resaltado "+objResaltado.transform.position);
 		print("offset "+box.offset.x);
+	
+	}
+	private void PosicionarObjetosAux(){
+		objAux.transform.position=new Vector2(transform.position.x,transform.position.y);
+		objAux.transform.localScale=new Vector2(0.35f,0.35f);
+		objAux.transform.localPosition=new Vector2(-0.3f,0.3f);
+
+		objInput.transform.position=new Vector2(transform.position.x,transform.position.y);
+		objInput.transform.localScale=new Vector2(0.35f,0.35f);
+		objInput.transform.localPosition=new Vector2(0.3f,0.3f);
 	}
 	public int SetNumero(){
 		for(int i=0;i<aNums.Length;i++){
@@ -176,6 +188,16 @@ public class Celda :MonoBehaviour {
 		}
 		get{
 			return objResaltado;
+		}
+	}
+	public GameObject setObjAux{
+		set{
+			objAux=value;
+		}
+	}
+	public GameObject setObjInput{
+		set{
+			objInput=value;
 		}
 	}
 

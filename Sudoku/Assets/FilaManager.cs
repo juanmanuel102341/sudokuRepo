@@ -22,6 +22,8 @@ public class FilaManager : MonoBehaviour {
 			for(int i2=0;i2<9;i2++){
 				filas[i,i2]=manager.getCeldas[i].transform.GetChild(i2).gameObject;
 				filas[i,i2].GetComponent<Celda>().setObjReslatado=sprites.spriteClick;
+				filas[i,i2].GetComponent<Celda>().setObjAux=sprites.spriteClick.transform.GetChild(1).gameObject;
+				filas[i,i2].GetComponent<Celda>().setObjInput=sprites.spriteClick.transform.GetChild(0).gameObject;
 			}
 		}
 	}
