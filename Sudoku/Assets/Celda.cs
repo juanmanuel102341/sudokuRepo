@@ -9,7 +9,13 @@ public class Celda :MonoBehaviour {
 	private bool []aNums=new bool[9];
 	private Sprite sprite=null;
 	private SpriteRenderer spr;
+	private GameObject objResaltado;
+	private BoxCollider2D box;
+	private Vector2 initialLocalScale;
 	void Awake () {
+		box=GetComponent<BoxCollider2D>();
+		initialLocalScale=transform.localScale;
+		initialLocalScale=new Vector2(initialLocalScale.x+box.offset.x,initialLocalScale.y+box.offset.y);
 		ResetBooleans();
 		spr=transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>();
 		sprite=transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sprite;
@@ -36,8 +42,6 @@ public class Celda :MonoBehaviour {
 		}else{
 			//print( gameObject.name+" objeto nulo");
 		}
-
-
 	}
 
 	private int ObtenerNumero(string id){
@@ -121,10 +125,22 @@ public class Celda :MonoBehaviour {
 	}
 	public void Resaltar(){
 		Sprites aux=GameObject.FindGameObjectWithTag("base").GetComponent<Sprites>();
-		aux.spriteClick.SetActive(true);
-
-		aux.spriteClick.transform.position=new Vector2(transform.position.x+0.1f,transform.position.y);
+		//aux.spriteClick.SetActive(true);
+		objResaltado.SetActive(true);
+		PosicionarResaltado();
 	} 
+	private void PosicionarResaltado(){
+		
+		Vector2 sizeBox=box.size;
+		print("pos initial "+initialLocalScale);
+		//objResaltado.transform.localScale=new Vector2(initialLocalScale.x,initialLocalScale.y);
+
+		print("pos obj vacio antes "+transform.position);
+		objResaltado.transform.localScale=new Vector2(transform.localScale.x*sizeBox.x,transform.localScale.y*sizeBox.y);
+		objResaltado.transform.position=new Vector2(transform.position.x+box.offset.x,transform.position.y+box.offset.y);
+		print("pos bj resaltado "+objResaltado.transform.position);
+		print("offset "+box.offset.x);
+	}
 	public int SetNumero(){
 		for(int i=0;i<aNums.Length;i++){
 			if(!aNums[i]){
@@ -152,6 +168,14 @@ public class Celda :MonoBehaviour {
 	public bool[] getMyArraysBooleanos{
 		get{
 			return aNums; 
+		}
+	}
+	public GameObject setObjReslatado{
+		set{
+			objResaltado=value;	
+		}
+		get{
+			return objResaltado;
 		}
 	}
 

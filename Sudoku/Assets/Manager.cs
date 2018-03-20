@@ -29,21 +29,8 @@ public class Manager : MonoBehaviour {
 		fila.calc();
 		columna.calc();
 	
-	//	cuadrito.Control();
-	//	fila.Control();
-	//	columna.Control();
-
-	//	cuadrito.RegistroNumerosConteo();
-	
-		//fila.Imprimir();
-		//cuadrito.Imprimir();
-		
 	}
 
-
-
-
-	// Update is called once per frame
 	void Update () {
 		cuadrito.Control();
 		fila.Control();

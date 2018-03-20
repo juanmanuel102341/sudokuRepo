@@ -6,8 +6,10 @@ public class FilaManager : MonoBehaviour {
 
 	GameObject [,] filas=new GameObject[9,9];
 	private Manager manager;
+	private Sprites sprites;
 	void Awake () {
 		manager=GetComponent<Manager>();
+		sprites=GetComponent<Sprites>();
 	}
 	void Start(){
 		//calc();
@@ -19,6 +21,7 @@ public class FilaManager : MonoBehaviour {
 		for(int i=0;i<9;i++){
 			for(int i2=0;i2<9;i2++){
 				filas[i,i2]=manager.getCeldas[i].transform.GetChild(i2).gameObject;
+				filas[i,i2].GetComponent<Celda>().setObjReslatado=sprites.spriteClick;
 			}
 		}
 	}
