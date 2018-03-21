@@ -198,13 +198,14 @@ public class CuadritoManager : MonoBehaviour {
 					print("positivo!!!!!!!!!!!!!!!!!1 ");
 					for(int i3=0;i3<9;i3++){
 						Celda celda=cuadritos[i,i3].GetComponent<Celda>();
+						SpawnNumeroCelda spawnNumero=cuadritos[i,i3].GetComponent<SpawnNumeroCelda>();
 						if(!celda.get_set_Salio){
 
 							if(celda.getMyArraysBooleanos[i2]==false){
 								print("cambiando valor!!!!!!!!!!!!!!!!!");
 								celda.get_set_Salio=true;
 								celda.getNumero=i2+1;
-								celda.SpriteSpawn(i2+1);
+								spawnNumero.SpriteSpawn(i2+1);
 							}
 						}
 					}
@@ -216,12 +217,13 @@ public class CuadritoManager : MonoBehaviour {
 		for(int i=0;i<9;i++){
 			for(int i2=0;i2<9;i2++){
 				Celda celda=cuadritos[i,i2].GetComponent<Celda>();
+				SpawnNumeroCelda spawnNum=cuadritos[i,i2].GetComponent<SpawnNumeroCelda>();
 				if(!celda.get_set_Salio){
 					if(celda.BooleanosCompleto()){
 						int n=celda.SetNumero();
 						celda.get_set_Salio=true;
 						celda.getNumero=i2+1;
-						celda.SpriteSpawn(i2+1);
+						spawnNum.SpriteSpawn(i2+1);
 						print("cuadrito "+i);
 						print("CELDA "+celda.name);
 						print("numero encontrado BUSQUEDA!!!!!!!! "+n);

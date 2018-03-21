@@ -8,18 +8,20 @@ public class Celda :MonoBehaviour {
 	private int numero=0;
 	private bool []aNums=new bool[9];
 	private Sprite sprite=null;
-	private SpriteRenderer spr;
+
 	private GameObject objResaltado;
 	private GameObject objAux;
 	private GameObject objInput;
 	private BoxCollider2D box;
 	private Vector2 initialLocalScale;
+	private bool stateInput=true;
+	private Id [] ids=new Id[2]; 
 	void Awake () {
 		box=GetComponent<BoxCollider2D>();
 		initialLocalScale=transform.localScale;
 		initialLocalScale=new Vector2(initialLocalScale.x+box.offset.x,initialLocalScale.y+box.offset.y);
 		ResetBooleans();
-		spr=transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>();
+	
 		sprite=transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sprite;
 	//	print("sprite "+sprite);
 		Initial();
@@ -27,7 +29,25 @@ public class Celda :MonoBehaviour {
 //		if(sprite==null){
 //			spr.sprite=GameObject.FindGameObjectWithTag("base").GetComponent<Sprites>().sprites[0];
 //		}
+		ids[0]=GameObject.Find("Square").transform.GetChild(0).gameObject.GetComponent<Id>();
+		ids[1]=GameObject.Find("Square").transform.GetChild(1).gameObject.GetComponent<Id>();
 	}
+	void Start(){
+		for(int i=0;i<2;i++){
+			ids[i].onClickme+=OnStateCambio;
+		}
+	}
+	private void OnStateCambio(string _state){
+		objAux.SetActive(false);
+		objInput.SetActive(false);
+		if(_state=="SquareInput"){
+			stateInput=true;
+			print("estado input cambio"+stateInput);
+		}else{
+			stateInput=false;
+			print("estado input cambio"+stateInput);
+		}
+	} 
 	private void ResetBooleans(){
 		for(int i=0;i<9;i++){
 			aNums[i]=false;
@@ -93,38 +113,7 @@ public class Celda :MonoBehaviour {
 			return false;
 		}
 	}
-	public void SpriteSpawn(int num){
-		switch(num){
-		case 1:
-			spr.sprite=GameObject.FindGameObjectWithTag("base").GetComponent<Sprites>().sprites[num-1];
-			break;
-		case 2:
-			spr.sprite=GameObject.FindGameObjectWithTag("base").GetComponent<Sprites>().sprites[num-1];
-			break;
-		case 3: 
-			spr.sprite=GameObject.FindGameObjectWithTag("base").GetComponent<Sprites>().sprites[num-1];
-			break;
-		case 4:
-			spr.sprite=GameObject.FindGameObjectWithTag("base").GetComponent<Sprites>().sprites[num-1];
-			break;
-		case 5:
-			spr.sprite=GameObject.FindGameObjectWithTag("base").GetComponent<Sprites>().sprites[num-1];
-			break;
-		case 6: 
-			spr.sprite=GameObject.FindGameObjectWithTag("base").GetComponent<Sprites>().sprites[num-1];
-			break;
-		case 7:
-			spr.sprite=GameObject.FindGameObjectWithTag("base").GetComponent<Sprites>().sprites[num-1];
-			break;
-		case 8:
-			spr.sprite=GameObject.FindGameObjectWithTag("base").GetComponent<Sprites>().sprites[num-1];
-			break;
-		case 9:
-				spr.sprite=GameObject.FindGameObjectWithTag("base").GetComponent<Sprites>().sprites[num-1];
-			break;
-					
-		}
-	}
+
 	public void Resaltar(){
 		Sprites aux=GameObject.FindGameObjectWithTag("base").GetComponent<Sprites>();
 		//aux.spriteClick.SetActive(true);
@@ -134,14 +123,14 @@ public class Celda :MonoBehaviour {
 	private void PosicionarResaltado(){
 		PosicionarObjetosAux();
 		Vector2 sizeBox=box.size;
-		print("pos initial "+initialLocalScale);
+//		print("pos initial "+initialLocalScale);
 		//objResaltado.transform.localScale=new Vector2(initialLocalScale.x,initialLocalScale.y);
 
-		print("pos obj vacio antes "+transform.position);
+//		print("pos obj vacio antes "+transform.position);
 		objResaltado.transform.localScale=new Vector2(transform.localScale.x*sizeBox.x,transform.localScale.y*sizeBox.y);
 		objResaltado.transform.position=new Vector2(transform.position.x+box.offset.x,transform.position.y+box.offset.y);
-		print("pos bj resaltado "+objResaltado.transform.position);
-		print("offset "+box.offset.x);
+//		print("pos bj resaltado "+objResaltado.transform.position);
+	//	print("offset "+box.offset.x);
 	
 	}
 	private void PosicionarObjetosAux(){
@@ -152,6 +141,10 @@ public class Celda :MonoBehaviour {
 		objInput.transform.position=new Vector2(transform.position.x,transform.position.y);
 		objInput.transform.localScale=new Vector2(0.35f,0.35f);
 		objInput.transform.localPosition=new Vector2(0.3f,0.3f);
+	}
+	public void FueraAuxs(){
+		objAux.gameObject.SetActive(false);
+		objInput.gameObject.SetActive(false);
 	}
 	public int SetNumero(){
 		for(int i=0;i<aNums.Length;i++){
@@ -195,6 +188,15 @@ public class Celda :MonoBehaviour {
 			objAux=value;
 		}
 	}
+	public bool getStateInput{
+		set{
+			stateInput=value;
+		}
+		get{
+			return stateInput;
+		}
+	}
+
 	public GameObject setObjInput{
 		set{
 			objInput=value;

@@ -4,11 +4,14 @@ using UnityEngine;
 public class Deteccion : MonoBehaviour {
 	private Celda celda;
 	private bool active=false;
+	private SpawnNumeroCelda spawnNumeroCelda;
+	private SpawnNumeroAux spawnAux;
 	//public bool resaltando=false;
 	private KeyCode[] keys=new KeyCode[9];
 	void Awake () {
 		celda=GetComponent<Celda>();
-	
+		spawnNumeroCelda=GetComponent<SpawnNumeroCelda>();
+		spawnAux=GetComponent<SpawnNumeroAux>();
 		keys[0]=KeyCode.Alpha1;
 		keys[1]=KeyCode.Alpha2;
 		keys[2]=KeyCode.Alpha3;
@@ -25,9 +28,7 @@ public class Deteccion : MonoBehaviour {
 			print("click");
 			active=true;
 		}
-
 	}
-
 	void Update(){
 		
 		if(active){
@@ -38,51 +39,99 @@ public class Deteccion : MonoBehaviour {
 				if(Input.GetKeyDown(keys[i])){
 					switch(keys[i]){
 					case KeyCode.Alpha1:
-						celda.SpriteSpawn(i+1);
+						if(celda.getStateInput){
+							spawnNumeroCelda.SpriteSpawn(i+1);
+						}else{
+							
+							spawnAux.SpriteSpawn(i+1);
+
+						}
 
 						print("click numero 1");
 
 						i=9;//salis del aray
 					break;
 					case KeyCode.Alpha2:
-						celda.SpriteSpawn(i+1);
+						
 						print("click numero 2");
+						if(celda.getStateInput){
+							spawnNumeroCelda.SpriteSpawn(i+1);
+						}else{
+							spawnAux.SpriteSpawn(i+1);
+
+						}
 
 						i=9;//salis del aray
 						break;
 					case KeyCode.Alpha3:
-						celda.SpriteSpawn(i+1);
+						
 						print("click numero 3");
+						if(celda.getStateInput){
+							spawnNumeroCelda.SpriteSpawn(i+1);
+						}else{
+							spawnAux.SpriteSpawn(i+1);
+
+						}
 						i=9;//salis del aray
 						break;
 					case KeyCode.Alpha4:
-						celda.SpriteSpawn(i+1);
 						print("click numero 4");
+						if(celda.getStateInput){
+							spawnNumeroCelda.SpriteSpawn(i+1);
+						}else{
+							spawnAux.SpriteSpawn(i+1);
+
+						}
 						i=9;//salis del aray
 						break;
 					case KeyCode.Alpha5:
-						celda.SpriteSpawn(i+1);
+						if(celda.getStateInput){
+							spawnNumeroCelda.SpriteSpawn(i+1);
+						}else{
+							spawnAux.SpriteSpawn(i+1);
+
+						}
 						print("click numero 5");
 						i=9;//salis del aray
 						break;
 					case KeyCode.Alpha6:
-						celda.SpriteSpawn(i+1);
+						if(celda.getStateInput){
+							spawnNumeroCelda.SpriteSpawn(i+1);
+						}else{
+							spawnAux.SpriteSpawn(i+1);
+
+						}
 						print("click numero 6");
 						i=9;//salis del aray
 						break;
 					case KeyCode.Alpha7:
-						celda.SpriteSpawn(i+1);
 						print("click numero 7");
+						if(celda.getStateInput){
+							spawnNumeroCelda.SpriteSpawn(i+1);
+						}else{
+							spawnAux.SpriteSpawn(i+1);
+
+						}
 						i=9;//salis del aray
 						break;
 					case KeyCode.Alpha8:
-						celda.SpriteSpawn(i+1);
 						print("click numero 8");
+						if(celda.getStateInput){
+							spawnNumeroCelda.SpriteSpawn(i+1);
+						}else{
+							spawnAux.SpriteSpawn(i+1);
+
+						}
 						i=9;//salis del aray
 						break;
 					case KeyCode.Alpha9:
-						celda.SpriteSpawn(i+1);
 						print("click numero 9");
+						if(celda.getStateInput){
+							spawnNumeroCelda.SpriteSpawn(i+1);
+						}else{
+							spawnAux.SpriteSpawn(i+1);
+
+						}
 						i=9;//salis del aray
 						break;
 										
