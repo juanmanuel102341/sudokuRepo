@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class Deteccion : MonoBehaviour {
 	private Celda celda;
+
 	private bool active=false;
 	private SpawnNumeroCelda spawnNumeroCelda;
 	private SpawnNumeroAux spawnAux;
@@ -33,7 +34,10 @@ public class Deteccion : MonoBehaviour {
 		
 		if(active){
 			if(!celda.get_set_Salio){
+				
 				celda.Resaltar();
+
+
 			}
 			for(int i=0;i<9;i++){		
 				if(Input.GetKeyDown(keys[i])){
@@ -41,13 +45,13 @@ public class Deteccion : MonoBehaviour {
 					case KeyCode.Alpha1:
 						if(celda.getStateInput){
 							spawnNumeroCelda.SpriteSpawn(i+1);
-						}else{
-							
-							spawnAux.SpriteSpawn(i+1);
+							print("click numero 1");
 
+						}else{
+							spawnAux.SpriteSpawn(i+1);
+							print("click AUX numero 1");
 						}
 
-						print("click numero 1");
 
 						i=9;//salis del aray
 					break;

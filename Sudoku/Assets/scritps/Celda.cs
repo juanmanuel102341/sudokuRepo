@@ -8,18 +8,21 @@ public class Celda :MonoBehaviour {
 	private int numero=0;
 	private bool []aNums=new bool[9];
 	private Sprite sprite=null;
-
+	private Deteccion deteccion;
 	private GameObject objResaltado;
 	private GameObject objAux;
 	private GameObject objInput;
 	private BoxCollider2D box;
 	private Vector2 initialLocalScale;
 	private bool stateInput=true;
-	private Id [] ids=new Id[2]; 
+	private SpawnNumeroAux spawnNumAuxs;
+	private bool res=false;
 	void Awake () {
+		spawnNumAuxs=GetComponent<SpawnNumeroAux>();
 		box=GetComponent<BoxCollider2D>();
 		initialLocalScale=transform.localScale;
 		initialLocalScale=new Vector2(initialLocalScale.x+box.offset.x,initialLocalScale.y+box.offset.y);
+		deteccion=GetComponent<Deteccion>();
 		ResetBooleans();
 	
 		sprite=transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sprite;
@@ -29,21 +32,24 @@ public class Celda :MonoBehaviour {
 //		if(sprite==null){
 //			spr.sprite=GameObject.FindGameObjectWithTag("base").GetComponent<Sprites>().sprites[0];
 //		}
-		ids[0]=GameObject.Find("Square").transform.GetChild(0).gameObject.GetComponent<Id>();
-		ids[1]=GameObject.Find("Square").transform.GetChild(1).gameObject.GetComponent<Id>();
+	}
+	public void Events(){
+		objInput.GetComponent<Id>().onClickme+=OnStateCambio;
+		objAux.GetComponent<Id>().onClickme+=OnStateCambio;
 	}
 	void Start(){
-		for(int i=0;i<2;i++){
-			ids[i].onClickme+=OnStateCambio;
-		}
+
 	}
 	private void OnStateCambio(string _state){
-		objAux.SetActive(false);
-		objInput.SetActive(false);
+		
 		if(_state=="SquareInput"){
+			if(deteccion.getActive){
+			spawnNumAuxs.EstadoNums(false);
+			}
 			stateInput=true;
 			print("estado input cambio"+stateInput);
 		}else{
+			spawnNumAuxs.EstadoNums(true);
 			stateInput=false;
 			print("estado input cambio"+stateInput);
 		}
@@ -118,10 +124,14 @@ public class Celda :MonoBehaviour {
 		Sprites aux=GameObject.FindGameObjectWithTag("base").GetComponent<Sprites>();
 		//aux.spriteClick.SetActive(true);
 		objResaltado.SetActive(true);
+		res=true;
 		PosicionarResaltado();
-	} 
+		if(stateInput){
+		spawnNumAuxs.EstadoNums(false);
+		}
+		}
 	private void PosicionarResaltado(){
-		PosicionarObjetosAux();
+		
 		Vector2 sizeBox=box.size;
 //		print("pos initial "+initialLocalScale);
 		//objResaltado.transform.localScale=new Vector2(initialLocalScale.x,initialLocalScale.y);
@@ -133,19 +143,8 @@ public class Celda :MonoBehaviour {
 	//	print("offset "+box.offset.x);
 	
 	}
-	private void PosicionarObjetosAux(){
-		objAux.transform.position=new Vector2(transform.position.x,transform.position.y);
-		objAux.transform.localScale=new Vector2(0.35f,0.35f);
-		objAux.transform.localPosition=new Vector2(-0.3f,0.3f);
 
-		objInput.transform.position=new Vector2(transform.position.x,transform.position.y);
-		objInput.transform.localScale=new Vector2(0.35f,0.35f);
-		objInput.transform.localPosition=new Vector2(0.3f,0.3f);
-	}
-	public void FueraAuxs(){
-		objAux.gameObject.SetActive(false);
-		objInput.gameObject.SetActive(false);
-	}
+
 	public int SetNumero(){
 		for(int i=0;i<aNums.Length;i++){
 			if(!aNums[i]){
@@ -200,6 +199,11 @@ public class Celda :MonoBehaviour {
 	public GameObject setObjInput{
 		set{
 			objInput=value;
+		}
+	}
+	public bool setBooleanoResaltar{
+		set{
+			res=value;
 		}
 	}
 
